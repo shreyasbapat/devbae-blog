@@ -45,22 +45,6 @@ jobs:
             cat std.err
             exit $(wc -l std.err | awk '{print $1}')
       - run:
-          name: HTMLProofer tests
-          command: |
-            bundle exec htmlproofer ./html \
-              --allow-hash-href \
-              --check-html \
-              --disable-external
-      - run:
-          name: HTMLProofer with external
-          command: |
-            if [ "${CIRCLE_BRANCH}" = "master" ]; then
-             bundle exec htmlproofer ./html \
-               --allow-hash-href \
-               --check-html \
-               --http-status-ignore 302
-            fi
-      - run:
           name: Jekyll re-build for local
           command: |
             echo "url: https://${CIRCLE_BUILD_NUM}-30926520-gh.circle-artifacts.com" > circle.yml && \
